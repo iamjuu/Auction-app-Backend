@@ -1,19 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const {propertyImageupload} = require('../middleware/multer')
+const { propertyImageupload } = require("../middleware/multer");
 
 const {
-  SignupGet,
   SignupPost,
-  LoginGet,
-LoginPost,  
-} = require("../controller/UserController");
+} = require("../controller/user/signupController");
 
 router
-  .get("/signup", SignupGet)
   .post("/signup", SignupPost)
 
-  .get("/login", LoginGet)
-  .post("/login", LoginPost)
+  // .get("/login", LoginGet)
+  // .post("/login", LoginPost);
 
 module.exports = router;

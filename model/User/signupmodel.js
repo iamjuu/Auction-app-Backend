@@ -1,7 +1,7 @@
 
 const mongoose=require('mongoose');
 
-const User = new mongoose.Schema({
+const SignupData = new mongoose.Schema({
     name:{
         type:String
     },
@@ -13,7 +13,10 @@ const User = new mongoose.Schema({
     }
 })
 
-const UserSchema = mongoose.model('usersdata',User)
+const signupData = mongoose.model('usersdata',SignupData)
 
-module.exports= UserSchema
+module.exports= {
+
+    signupData
+}
 
