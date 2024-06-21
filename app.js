@@ -22,9 +22,9 @@ const corsOptions = {
   origin: "http://localhost:5173",  
 };
 app.use(cors(corsOptions));
-app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('/',userRouter)
 
 

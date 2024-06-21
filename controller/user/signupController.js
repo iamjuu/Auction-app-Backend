@@ -3,7 +3,7 @@ const { signupData } = require("../../model/User/signupmodel");
 module.exports = {
   SignupPost: async (req, res) => {
     try {
-
+console.log(req.body);
       const { Name, email, password } = req.body;
       req.session.email = email
       const Data = {
@@ -11,10 +11,6 @@ module.exports = {
         email: email,
         password: password,
       }
-
-
-
-      console.log(Data, "signup data");
       const newData = new signupData(Data);
       await newData.save();
       res.status(200).json({ success: true });
