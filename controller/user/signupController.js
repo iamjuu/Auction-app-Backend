@@ -5,7 +5,7 @@ module.exports = {
   SignupPost: async (req, res) => {
     try {
       const { Name, email, password, type } = req.body;
-      req.session.email = email;
+      req.session.email = email
 
       if (type === "User") {
         const Data = {
