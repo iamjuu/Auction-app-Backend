@@ -5,7 +5,8 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const  DBConnect= require('./config/config')
 const port = process.env.PORT||5000
-const userRouter =require('./Router/UserRouter')
+const userRouter = require('./Router/UserRouter')
+const agentRouter = require('./Router/AgentRouter')
 const session = require('express-session');
 require('dotenv').config()
 
@@ -14,7 +15,7 @@ require('dotenv').config()
 app.use(session({
   secret: 'juu',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
 }));
 
 
@@ -26,6 +27,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/',userRouter)
+app.use('/',agentRouter)
 
 
 

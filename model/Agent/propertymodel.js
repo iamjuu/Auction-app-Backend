@@ -26,3 +26,8 @@ const property = new mongoose.Schema({
 
 
 })
+const propertyData = mongoose.model('propertryData',property)
+
+module.exports={
+    propertyData
+}
