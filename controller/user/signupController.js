@@ -19,7 +19,7 @@ module.exports = {
 
         const newData = new signupData(Data);
         await newData.save();
-        res.status(200).json({ success: true,typeis :type });
+        res.status(200).json({ success: true, });
       } else if (type === "Agent") {
         const Data = { name: Name, email, password }
         TypeIs=type
@@ -29,7 +29,7 @@ module.exports = {
 
         const newData = new AgentsignupDatas(Data);
         await newData.save();
-        res.status(200).json({ success: true ,typeis :type});
+        res.status(200).json({ success: true });
       } else {
         res.status(400).json({ success: false, message: 'Invalid type' });
       }
