@@ -3,7 +3,7 @@ const {AgentsignupDatas}= require('../../model/Agent/AgentSignupmodel')
 const sendmail = require('../../utils/otp');
 
 let UserOtp; 
-
+let TypeIs;
 
 module.exports = {
   SignupPost: async (req, res) => {
@@ -12,20 +12,24 @@ module.exports = {
 
       if (type === "User") {
         const Data = { name: Name, email, password };
+        TypeIs=type
+        console.log(TypeIs,'hooo');
         req.session.email = email;
         console.log(req.session.email, 'session email in user');
 
         const newData = new signupData(Data);
         await newData.save();
-        res.status(200).json({ success: true });
+        res.status(200).json({ success: true,typeis :type });
       } else if (type === "Agent") {
         const Data = { name: Name, email, password }
+        TypeIs=type
+        console.log(TypeIs,'type is aaagent');
         req.session.email = email;
         console.log(req.session.email, 'session email in agent ');
 
         const newData = new AgentsignupDatas(Data);
         await newData.save();
-        res.status(200).json({ success: true });
+        res.status(200).json({ success: true ,typeis :type});
       } else {
         res.status(400).json({ success: false, message: 'Invalid type' });
       }
@@ -57,7 +61,7 @@ module.exports = {
      
   
       if (userOtp === UserOtp) {
-        res.status(200).json({ success: true, message: 'OTP verified' });
+        res.status(200).json({ success: true, TypeIs:TypeIs, message: 'OTP verified' });
         console.log('OTP verified');
       } else {
         res.status(400).json({ success: false, message: 'Invalid OTP' });
