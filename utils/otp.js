@@ -11,11 +11,11 @@ const sendEmail = (email, otp) => {
 
   const mailOptions = {
     from: {
-      name: 'juu-Auction',
+      name: 'juu-cart',
       address: "juuu5250@gmail.com",
     },
     to: email,
-    subject: "OTP  juu Application  for Auction",
+    subject: "OTP from juu cart Application",
     text: `Your OTP is ${otp}`,
   };
 
