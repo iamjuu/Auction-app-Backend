@@ -1,7 +1,7 @@
 const { signupData } = require("../../model/User/signupmodel");
 const { AgentsignupDatas } = require("../../model/Agent/AgentSignupmodel");
 const sendEmail = require("../../utils/otp");
- const jwt =require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 
 let UserOtp;
 let TypeIs;
@@ -87,8 +87,7 @@ module.exports = {
   },
   loginPost: async (req, res) => {
     try {
-    
-      const { email,password } = req.body;
+      const { email, password } = req.body;
       const userExisit = await signupData.findOne({ email: email });
       const agentExisit = await AgentsignupDatas.findOne({ email: email });
 
@@ -100,26 +99,22 @@ module.exports = {
 
       const checkExisit = userExisit || agentExisit;
       const passwordVerification = checkExisit.password == password;
-      const role = userExisit ? 'user' :'agent'
-  
+      const role = userExisit ? "user" : "agent";
+
       if (!passwordVerification) {
         return res
           .status(401)
           .json({ success: false, message: "incorrect password" });
       }
 
-if(checkExisit &&passwordVerification ){
-
-  const payload = {
-   userId:checkExisit._id, 
-   role:role,    
-  }
-  const token = jwt.sign(payload ,process.env.jwt)
-   return res.status(200).json({role:role,token})
-}
-
-
-
+      if (checkExisit && passwordVerification) {
+        const payload = {
+          userId: checkExisit._id,
+          role: role,
+        };
+        const token = jwt.sign(payload, process.env.jwt);
+        return res.status(200).json({ role: role, token });
+      }
     } catch (error) {}
   },
 };

@@ -2,7 +2,9 @@ const mongoose = require('mongoose')
 
 const property = new mongoose.Schema({
 
-    Image: Array,
+    images:{
+        type:Array
+    },
 
     name:{
         type:String
