@@ -16,6 +16,7 @@ module.exports = {
         req.session.email = email;
         console.log(req.session.email, "session email in user");
 
+        TypeIs=type
         const newData = new signupData(Data);
         await newData.save();
       } else if (type === "Agent") {
@@ -23,6 +24,7 @@ module.exports = {
         req.session.email = email;
         console.log(req.session.email, "session email in agent");
 
+        TypeIs=type
         const newData = new AgentsignupDatas(Data);
         await newData.save();
       } else {
