@@ -107,7 +107,7 @@ module.exports = {
       }
 
 if(checkExisit &&passwordVerification ){
-   ret
+   return res.json({role:role})
 }
 
     } catch (error) {}
