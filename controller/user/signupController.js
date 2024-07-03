@@ -1,6 +1,7 @@
 const { signupData } = require("../../model/User/signupmodel");
 const { AgentsignupDatas } = require("../../model/Agent/AgentSignupmodel");
-const sendEmail = require("../../utils/otp"); // Import sendEmail function
+const sendEmail = require("../../utils/otp");
+ const jwt =require('jsonwebtoken')
 
 let UserOtp;
 let TypeIs;
@@ -86,6 +87,7 @@ module.exports = {
   },
   loginPost: async (req, res) => {
     try {
+    
       const { email,password } = req.body;
       const userExisit = await signupData.findOne({ email: email });
       const agentExisit = await AgentsignupDatas.findOne({ email: email });
@@ -107,8 +109,16 @@ module.exports = {
       }
 
 if(checkExisit &&passwordVerification ){
-   return res.json({role:role})
+
+  const payload = {
+   userId:checkExisit._id, 
+   role:role,    
+  }
+  const token = jwt.sign(payload ,process.env.jwt)
+   return res.status(200).json({role:role,token})
 }
+
+
 
     } catch (error) {}
   },
