@@ -16,7 +16,7 @@ module.exports = {
         req.session.email = email;
         console.log(req.session.email, "session email in user");
 
-        TypeIs=type
+        TypeIs = type;
         const newData = new signupData(Data);
         await newData.save();
       } else if (type === "Agent") {
@@ -24,7 +24,7 @@ module.exports = {
         req.session.email = email;
         console.log(req.session.email, "session email in agent");
 
-        TypeIs=type
+        TypeIs = type;
         const newData = new AgentsignupDatas(Data);
         await newData.save();
       } else {
@@ -60,21 +60,18 @@ module.exports = {
   otpPost: async (req, res) => {
     try {
       const checkOtpData = req.body;
-  
 
       const userOtp = parseInt(
         `${checkOtpData.otp1}${checkOtpData.otp2}${checkOtpData.otp3}${checkOtpData.otp4}`,
         10
       );
-console.log(UserOtp,'  generated otp');
-console.log(userOtp,'typed otp ');
-console.log(TypeIs);
-// code clear 
+      console.log(UserOtp, "  generated otp");
+
+      // code clear
       if (userOtp === UserOtp) {
         res
           .status(200)
           .json({ success: true, TypeIs: TypeIs, message: "OTP verified" });
-        console.log(TypeIs, "typesss");
         console.log("OTP verified");
       } else {
         res.status(400).json({ success: false, message: "Invalid OTP" });
@@ -87,9 +84,32 @@ console.log(TypeIs);
         .json({ success: false, message: "Internal server error" });
     }
   },
-
   loginPost: async (req, res) => {
-    console.log(req.body, "type", TypeIs);
+    try {
+      const { email,password } = req.body;
+      const userExisit = await signupData.findOne({ email: email });
+      const agentExisit = await AgentsignupDatas.findOne({ email: email });
+
+      if (!userExisit && !agentExisit) {
+        return res
+          .status(401)
+          .json({ success: false, message: "please create a account" });
+      }
+
+      const checkExisit = userExisit || agentExisit;
+      const passwordVerification = checkExisit.password == password;
+      const role = userExisit ? 'user' :'agent'
+  
+      if (!passwordVerification) {
+        return res
+          .status(401)
+          .json({ success: false, message: "incorrect password" });
+      }
+
+if(checkExisit &&passwordVerification ){
+   ret
+}
+
+    } catch (error) {}
   },
 };
-  
