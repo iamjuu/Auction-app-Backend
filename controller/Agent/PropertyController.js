@@ -3,6 +3,7 @@ const {propertyData} = require('../../model/Agent/propertymodel')
 
 module.exports={
     propertyPost:async(req,res) =>{
+  try {           
 const {name,propertyname,minimumdata,Phone,Address,propertyType} = req.body
 const propertyImage = req.files
 const Data={
@@ -14,8 +15,12 @@ const Data={
     propertyType:propertyType,
     images:propertyImage
 }
-console.log(Data,'form');
     const newData = new propertyData(Data)
     await newData.save()
+    console.log(newData,' new data');
+    res.status(200).json({message:true})
+    }catch (error) {
+           console.log(error,'error in agent property post');   
+}
     }
 }
