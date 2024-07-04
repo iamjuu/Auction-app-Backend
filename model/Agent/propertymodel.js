@@ -9,12 +9,11 @@ const property = new mongoose.Schema({
     name:{
         type:String
     },
-
     propertyname:{
         type:String
     },
     minimumdata:{
-        type:Number
+        type:String
     },
     Phone:{
         type:Number
