@@ -8,6 +8,7 @@ const port = process.env.PORT||5000
 const userRouter = require('./Router/UserRouter')
 const agentRouter = require('./Router/AgentRouter')
 const session = require('express-session');
+const initializeSocket = require('./socket/socket')
 require('dotenv').config()
 
 

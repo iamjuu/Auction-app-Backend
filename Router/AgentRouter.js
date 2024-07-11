@@ -10,6 +10,7 @@ const upload =multer({storage:storage})
 
 router.post('/addproperty',upload.array('images'),property.propertyPost)
        .get('/propertydetails',agent.propertydetails)
+       .post('/agent/userdelete',agent.userDelete)
 
 
 module.exports= router;
